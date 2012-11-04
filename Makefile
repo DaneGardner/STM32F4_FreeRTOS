@@ -65,7 +65,7 @@ OBJECTS  = $(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(SOURCES))))
 CPPFLAGS += -Isrc
 CPPFLAGS += -IFreeRTOS/Source/include
 CPPFLAGS += -Ilibs/CMSIS/Include
-CPPFLAGS += -Ilibs/Device/STM32F4xx/Include
+CPPFLAGS += -Ilibs/CMSIS/ST/STM32F4xx/Include
 CPPFLAGS += -Ilibs/STM32F4xx_StdPeriph_Driver/inc
 
 #---------------- Compiler Options C ----------------
