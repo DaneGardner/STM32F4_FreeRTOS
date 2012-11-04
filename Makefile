@@ -7,7 +7,7 @@ OPT = 2
 # Object files directory
 # Warning: this will be removed by make clean!
 #
-OBJDIR = obj
+OBJDIR = .obj
 
 # Target file name (without extension)
 TARGET = $(OBJDIR)/STM32F4_Test
