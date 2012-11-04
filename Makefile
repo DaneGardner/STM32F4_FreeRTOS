@@ -10,7 +10,7 @@ OPT = 2
 OBJDIR = .obj
 
 # Target file name (without extension)
-TARGET = $(OBJDIR)/STM32F4_Test
+TARGET = $(OBJDIR)/STM32F4_FreeRTOS
 
 # Define all C source files (dependencies are generated automatically)
 #
@@ -27,46 +27,46 @@ SOURCES += FreeRTOS/Source/list.c
 SOURCES += FreeRTOS/Source/croutine.c
 SOURCES += FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c 
 
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/misc.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c
-SOURCES += libs/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/misc.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c
+SOURCES += STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c
 
 OBJECTS  = $(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(SOURCES))))
 
 # Place -D, -U or -I options here for C and C++ sources
 CPPFLAGS += -Isrc
 CPPFLAGS += -IFreeRTOS/Source/include
-CPPFLAGS += -Ilibs/CMSIS/Include
-CPPFLAGS += -Ilibs/CMSIS/ST/STM32F4xx/Include
-CPPFLAGS += -Ilibs/STM32F4xx_StdPeriph_Driver/inc
+CPPFLAGS += -ICMSIS/Include
+CPPFLAGS += -ICMSIS/ST/STM32F4xx/Include
+CPPFLAGS += -ISTM32F4xx_StdPeriph_Driver/inc
 
 #---------------- Compiler Options C ----------------
 #  -g*:          generate debugging information
@@ -252,7 +252,7 @@ $(shell mkdir -p $(OBJDIR) 2>/dev/null)
 $(shell mkdir -p $(OBJDIR)/src 2>/dev/null)
 $(shell mkdir -p $(OBJDIR)/FreeRTOS/Source/ 2>/dev/null)
 $(shell mkdir -p $(OBJDIR)/FreeRTOS/Source/portable/GCC/ARM_CM4F 2>/dev/null)
-$(shell mkdir -p $(OBJDIR)/libs/STM32F4xx_StdPeriph_Driver/src 2>/dev/null)
+$(shell mkdir -p $(OBJDIR)/STM32F4xx_StdPeriph_Driver/src 2>/dev/null)
 
 # Include the dependency files
 -include $(wildcard $(OBJDIR)/*.d)
