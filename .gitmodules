@@ -1,9 +1,6 @@
 [submodule "FreeRTOS"]
 	path = FreeRTOS
 	url = https://github.com/DaneGardner/FreeRTOS.git
-[submodule "CMSIS"]
-	path = CMSIS
-	url = https://github.com/DaneGardner/CMSIS.git
-[submodule "STM32F4xx_StdPeriph_Driver"]
-	path = STM32F4xx_StdPeriph_Driver
-	url = https://github.com/DaneGardner/STM32F4xx_StdPeriph_Driver.git
+[submodule "STM32F4xx"]
+	path = STM32F4xx
+	url = https://github.com/DaneGardner/STM32F4xx.git
