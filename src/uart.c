@@ -1,6 +1,9 @@
 #include "uart.h"
-#include "stm32f4xx.h"
+
 #include "ringbuf.h"
+
+#include <stm32f4xx.h>
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>

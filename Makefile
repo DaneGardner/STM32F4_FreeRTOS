@@ -1,267 +1,212 @@
-# Optimization level, can be [0, 1, 2, 3, s]. 
-#     0 = turn off optimization. s = optimize for size.
-# 
-
-OPT = 2
-
-# Object files directory
-# Warning: this will be removed by make clean!
 #
-OBJDIR = .obj
-
-# Target file name (without extension)
-TARGET = $(OBJDIR)/STM32F4_FreeRTOS
-
-# Define all C source files (dependencies are generated automatically)
+#       !!!! Do NOT edit this makefile with an editor which replace tabs by spaces !!!!
 #
-SOURCES += src/uart.c
-SOURCES += src/ustime.c
-SOURCES += src/main.c
-SOURCES += src/startup_stm32f4xx.s
-SOURCES += src/system_stm32f4xx.c
-SOURCES += src/syscalls.c
-
-SOURCES += FreeRTOS/Source/tasks.c
-SOURCES += FreeRTOS/Source/queue.c
-SOURCES += FreeRTOS/Source/list.c
-SOURCES += FreeRTOS/Source/croutine.c
-SOURCES += FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c 
-
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/misc.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c
-SOURCES += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c
-
-OBJECTS  = $(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(SOURCES))))
-
-# Place -D, -U or -I options here for C and C++ sources
-CPPFLAGS += -Isrc
-CPPFLAGS += -IFreeRTOS/Source/include
-CPPFLAGS += -ISTM32F4xx/CMSIS/Include
-CPPFLAGS += -ISTM32F4xx/CMSIS/Device/ST/STM32F4xx/Include
-CPPFLAGS += -ISTM32F4xx/STM32F4xx_StdPeriph_Driver/inc
-
-# Use the Standard Peripheral Driver libraries
-CPPFLAGS += -DUSE_STDPERIPH_DRIVER
-
-#---------------- Compiler Options C ----------------
-#  -g*:          generate debugging information
-#  -O*:          optimization level
-#  -f...:        tuning, see GCC documentation
-#  -Wall...:     warning level
-#  -Wa,...:      tell GCC to pass this to the assembler.
-#    -adhlns...: create assembler listing
-CFLAGS  = -O$(OPT)
-CFLAGS += -std=gnu99
-CFLAGS += -gdwarf-2
-CFLAGS += -ffunction-sections
-CFLAGS += -fdata-sections
-CFLAGS += -Wall
-#CFLAGS += -Wextra
-#CFLAGS += -Wpointer-arith
-#CFLAGS += -Wstrict-prototypes
-#CFLAGS += -Winline
-#CFLAGS += -Wunreachable-code
-#CFLAGS += -Wundef
-CFLAGS += -Wa,-adhlns=$(OBJDIR)/$(*F).lst
-
-# Optimize use of the single-precision FPU
+##############################################################################################
 #
-CFLAGS += -fsingle-precision-constant
-
-# This will not work without recompiling libs
+# On command line:
 #
-# CFLAGS += -fshort-double
-
-#---------------- Compiler Options C++ ----------------
+# make all = Create project
 #
-CXXFLAGS  = $(CFLAGS)
-
-#---------------- Assembler Options ----------------
-#  -Wa,...:   tell GCC to pass this to the assembler
-#  -adhlns:   create listing
+# make clean = Clean project files.
 #
-ASFLAGS = -Wa,-adhlns=$(OBJDIR)/$(*F).lst
+# To rebuild project do "make clean" and "make all".
+#
 
+##############################################################################################
+# Start of default section
+#
 
-#---------------- Linker Options ----------------
-#  -Wl,...:     tell GCC to pass this to linker
-#    -Map:      create map file
-#    --cref:    add cross reference to  map file
-LDFLAGS += -lm
-LDFLAGS += -Wl,-Map=$(TARGET).map,--cref
-LDFLAGS += -Wl,--gc-sections
-LDFLAGS += -Tsrc/stm32_flash.ld
+TRGT = arm-none-eabi-
+CC   = $(TRGT)gcc
+CP   = $(TRGT)objcopy
+AS   = $(TRGT)gcc -x assembler-with-cpp
+BIN  = $(CP) -O ihex
 
-#============================================================================
+MCU  = cortex-m4
 
+# List all default C defines here, like -D_DEBUG=1
+DDEFS = -std=gnu99
 
-# Define programs and commands
-TOOLCHAIN = arm-none-eabi
-CC        = $(TOOLCHAIN)-gcc
-OBJCOPY   = $(TOOLCHAIN)-objcopy
-OBJDUMP   = $(TOOLCHAIN)-objdump
-SIZE      = $(TOOLCHAIN)-size
-NM        = $(TOOLCHAIN)-nm
-OPENOCD   = openocd
-DOXYGEN   = doxygen
-STLINK    = tools/ST-LINK_CLI.exe
+# List all default ASM defines here, like -D_DEBUG=1
+DADEFS =
 
+# List all default directories to look for include files here
+DINCDIR =
 
-ifeq (AMD64, $(PROCESSOR_ARCHITEW6432))
-  SUBWCREV = tools/SubWCRev64.exe
+# List the default directory to look for the libraries here
+DLIBDIR =
+
+# List all default libraries here
+DLIBS =
+
+#
+# End of default section
+##############################################################################################
+
+##############################################################################################
+# Start of user section
+#
+
+#
+# Define project name and Ram/Flash mode here
+PROJECT  = STM32F4_FreeRTOS
+RUN_FROM_FLASH = 1
+USE_HARD_FPU   = 1
+
+#
+# Define linker script file here
+#
+ifeq ($(RUN_FROM_FLASH), 0)
+LDSCRIPT = STM32F4xx/LD_Scripts/stm32f4xx_ram.ld
+FULL_PRJ = $(PROJECT)_ram
 else
-  SUBWCREV = tools/SubWCRev.exe
+LDSCRIPT = STM32F4xx/LD_Scripts/stm32f4xxxg_flash.ld
+FULL_PRJ = $(PROJECT)_rom
+endif
+
+#
+# Define FPU settings here
+#
+ifeq ($(USE_HARD_FPU), 0)
+FPU = -mfloat-abi=soft -mfpu=fpv4-sp-d16
+else
+FPU = -mfloat-abi=hard -mfpu=fpv4-sp-d16 -D__FPU_USED=1
 endif
 
 
-# Compiler flags to generate dependency files
-GENDEPFLAGS = -MMD -MP -MF $(OBJDIR)/$(*F).d
+# List all user C define here, like -D_DEBUG=1
+UDEFS = -DUSE_STDPERIPH_DRIVER
 
+# Define ASM defines here
+UADEFS =
 
-# Combine all necessary flags and optional flags
-# Add target processor to flags.
+# List C source files here
+SRC = src/main.c
+SRC += src/uart.c
+SRC += src/CMSIS/system_stm32f4xx.c
+SRC += src/CMSIS/syscalls.c
+SRC += src/FreeRTOS/ustime.c
+
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/misc.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c
+
+SRC += FreeRTOS/Source/tasks.c
+SRC += FreeRTOS/Source/queue.c
+SRC += FreeRTOS/Source/list.c
+SRC += FreeRTOS/Source/croutine.c
+SRC += FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
+
+# List ASM source files here
+ASRC = src/CMSIS/startup_stm32f4xx.s
+
+# List all user directories here
+UINCDIR += src
+UINCDIR += src/CMSIS
+UINCDIR += src/FreeRTOS
+UINCDIR += STM32F4xx/CMSIS/Include
+UINCDIR += STM32F4xx/CMSIS/Device/ST/STM32F4xx/Include
+UINCDIR += STM32F4xx/STM32F4xx_StdPeriph_Driver/inc
+UINCDIR += FreeRTOS/Source/include
+
+# List the user directory to look for the libraries here
+ULIBDIR =
+
+# List all user libraries here
+ULIBS =
+
+# Define optimisation level here
+OPT = -O0
+#OPT = -O2 -falign-functions=16 -fno-inline -fomit-frame-pointer
+#OPT = -Os
+
 #
-#CPU = -mcpu=cortex-m3 -mthumb -mfloat-abi=soft
-#CPU = -mcpu=cortex-m4 -mthumb 
+# End of user defines
+##############################################################################################
+
+
+INCDIR  = $(patsubst %,-I%,$(DINCDIR) $(UINCDIR))
+LIBDIR  = $(patsubst %,-L%,$(DLIBDIR) $(ULIBDIR))
+
+ifeq ($(RUN_FROM_FLASH), 0)
+DEFS    = $(DDEFS) $(UDEFS) -DRUN_FROM_FLASH=0 -DVECT_TAB_SRAM
+else
+DEFS    = $(DDEFS) $(UDEFS) -DRUN_FROM_FLASH=1
+endif
+
+ADEFS   = $(DADEFS) $(UADEFS)
+OBJS    = $(ASRC:.s=.o) $(SRC:.c=.o)
+LIBS    = $(DLIBS) $(ULIBS)
+MCFLAGS = -mthumb -mcpu=$(MCU)
+
+ASFLAGS = $(MCFLAGS) -g -gdwarf-2 -Wa,-amhls=$(<:.s=.lst) $(ADEFS)
+CPFLAGS = $(MCFLAGS) $(OPT) $(FPU) -gdwarf-2 -Wall -Wstrict-prototypes -fverbose-asm -Wa,-ahlms=$(<:.c=.lst) $(DEFS)
+LDFLAGS = $(MCFLAGS) -mthumb -nostartfiles -T$(LDSCRIPT) -Wl,-Map=$(FULL_PRJ).map,--cref,--no-warn-mismatch $(LIBDIR)
+
+# Generate dependency information
+CPFLAGS += -MD -MP -MF .dep/$(@F).d
+
+#
+# makefile rules
 #
 
-CPU = -mcpu=cortex-m4 -mthumb -mfloat-abi=softfp -mfpu=fpv4-sp-d16
-
-CFLAGS   += $(CPU)
-CXXFLAGS += $(CPU)
-ASFLAGS  += $(CPU)
-LDFLAGS  += $(CPU)
-
-# Default target.
-all:  gccversion build showsize
-
-build: elf hex lss sym
-
-elf: $(TARGET).elf
-hex: $(TARGET).hex
-lss: $(TARGET).lss
-sym: $(TARGET).sym
+all: $(OBJS) $(FULL_PRJ).elf $(FULL_PRJ).hex
 
 
-doxygen:
-	@echo
-	@echo Creating Doxygen documentation
-	@$(DOXYGEN)
+%.o : %.c
+	$(CC) -c $(CPFLAGS) -I . $(INCDIR) $< -o $@
 
-# Display compiler version information
-gccversion: 
-	@$(CC) --version
+%.o : %.s
+	$(AS) -c $(ASFLAGS) $< -o $@
 
+%elf: $(OBJS)
+	$(CC) $(OBJS) $(LDFLAGS) $(LIBS) -o $@
 
-# Show the final program size
-showsize: elf
-	@echo
-	@$(SIZE) $(TARGET).elf 2>/dev/null
+%hex: %elf
+	$(BIN) $< $@
 
-
-# Flash the device  
-flash: hex
-#	$(OPENOCD) -f "openocd.cfg" -c "flash_image $(TARGET).elf; shutdown"
-	$(STLINK) -c SWD -P $(TARGET).hex -Run
-
-
-# Target: clean project
 clean:
-	@echo Cleaning project:
-	rm -rf $(OBJDIR)
-	rm -rf docs/html
+	-rm -f $(OBJS)
+	-rm -f $(FULL_PRJ).elf
+	-rm -f $(FULL_PRJ).map
+	-rm -f $(FULL_PRJ).hex
+	-rm -f $(SRC:.c=.c.bak)
+	-rm -f $(SRC:.c=.lst)
+	-rm -f $(ASRC:.s=.s.bak)
+	-rm -f $(ASRC:.s=.lst)
+	-rm -fR .dep
 
+#
+# Include the dependency files, should be the last of the makefile
+#
+-include $(shell mkdir .dep 2>/dev/null) $(wildcard .dep/*)
 
-# Create extended listing file from ELF output file
-%.lss: %.elf
-	@echo
-	@echo Creating Extended Listing: $@
-	$(OBJDUMP) -h -S -z $< > $@
-
-
-# Create a symbol table from ELF output file
-%.sym: %.elf
-	@echo
-	@echo Creating Symbol Table: $@
-	$(NM) -n $< > $@
-
-
-# Link: create ELF output file from object files
-.SECONDARY: $(TARGET).elf
-.PRECIOUS:  $(OBJECTS)
-$(TARGET).elf: $(OBJECTS)
-	@echo
-	@echo Linking: $@
-	$(CC) $^ $(LDFLAGS) --output $@ 
-
-
-# Create final output files (.hex, .eep) from ELF output file.
-%.hex: %.elf
-	@echo
-	@echo Creating hex file: $@
-	$(OBJCOPY) -O ihex $< $@
-
-# Compile: create object files from C source files
-$(OBJDIR)/%.o : %.c
-	@echo
-	@echo Compiling C: $<
-	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(GENDEPFLAGS) $< -o $@ 
-
-
-# Compile: create object files from C++ source files
-$(OBJDIR)/%.o : %.cpp
-	@echo
-	@echo Compiling CPP: $<
-	$(CC) -c $(CPPFLAGS) $(CXXFLAGS) $(GENDEPFLAGS) $< -o $@ 
-
-
-# Assemble: create object files from assembler source files
-$(OBJDIR)/%.o : %.s
-	@echo
-	@echo Assembling: $<
-	$(CC) -c $(CPPFLAGS) $(ASFLAGS) $< -o $@
-
-
-# Create object file directories
-$(shell mkdir -p $(OBJDIR) 2>/dev/null)
-$(shell mkdir -p $(OBJDIR)/src 2>/dev/null)
-$(shell mkdir -p $(OBJDIR)/FreeRTOS/Source/ 2>/dev/null)
-$(shell mkdir -p $(OBJDIR)/FreeRTOS/Source/portable/GCC/ARM_CM4F 2>/dev/null)
-$(shell mkdir -p $(OBJDIR)/STM32F4xx/STM32F4xx_StdPeriph_Driver/src 2>/dev/null)
-
-# Include the dependency files
--include $(wildcard $(OBJDIR)/*.d)
-
-
-# Listing of phony targets
-.PHONY: all build flash clean \
-        doxygen elf lss sym \
-        showsize gccversion
+# *** EOF ***
