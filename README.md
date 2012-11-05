@@ -11,8 +11,8 @@ Compiling
 
 The project is known to work with Yagarto [13.10.2012].
 
-  $ ./bootstrap.sh    # To pull the submodules from GitHub
-  $ make all
+    $ ./bootstrap.sh    # To pull the submodules from GitHub
+    $ make all
 
 
 Running
