@@ -81,10 +81,11 @@ UDEFS = -DUSE_STDPERIPH_DRIVER
 UADEFS =
 
 # List C source files here
-SRC = src/main.c
 SRC += src/uart.c
+SRC += src/main.c
+SRC += src/syscalls.c
 SRC += src/CMSIS/system_stm32f4xx.c
-SRC += src/CMSIS/syscalls.c
+SRC += src/CMSIS/stm32f4xx_it.c
 SRC += src/FreeRTOS/ustime.c
 
 SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/misc.c

@@ -14,50 +14,34 @@ extern __IO uint16_t CCR4_Val;
 
 void NMI_Handler(void)
 {
-  /* This function handles NMI exception. */
+  // This function handles NMI exception.
 }
 
 void HardFault_Handler(void)
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
+  // Go to infinite loop when Hard Fault exception occurs
   while (1);
 }
 
 void MemManage_Handler(void)
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
+  // Go to infinite loop when Memory Manage exception occurs
   while (1);
 }
 
 void BusFault_Handler(void)
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
+  // Go to infinite loop when Bus Fault exception occurs
   while (1);
 }
 
 void UsageFault_Handler(void)
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
+  // Go to infinite loop when Usage Fault exception occurs 
   while (1);
 }
 
 void DebugMon_Handler(void)
 {
-  /* This function handles Debug Monitor exception. */
+  // This function handles Debug Monitor exception.
 }
-
-void SVC_Handler(void)
-{
-  /*  This function handles SVCall exception. */
-}
-
-void PendSV_Handler(void)
-{
-  /* This function handles PendSV_Handler exception. */
-}
-
-void SysTick_Handler(void)
-{
-  /* This function handles SysTick Handler. */
-}
-
