@@ -1,5 +1,4 @@
 #include "uart.h"
-#include "ansi.h"
 
 #include <stm32f4xx.h>
 
@@ -25,7 +24,7 @@ static void fpu_task(void *pvParameters)
 {
     // Force x to stay in a FPU reg.
     //
-    register float x = 0;
+    register float x = 0.0f;
     struct task_param *p = pvParameters;
 
     for(;;) {
@@ -47,7 +46,7 @@ static void init_task(void *pvParameters)
     });
 
     uart_init(115200);
-    printf(ANSI_FG_LTRED "STM32F407" ANSI_NORMAL " FreeRTOS Test\n" );
+    printf("STM32F407 FreeRTOS Test\n" );
 
     vTaskDelay(100);
 
@@ -57,14 +56,14 @@ static void init_task(void *pvParameters)
         struct task_param *p;
 
         p = malloc(sizeof(struct task_param));
-        p->name     = malloc(16);
+        p->name     = malloc(configMAX_TASK_NAME_LEN);
         p->interval = (i+1) * 500;
         sprintf(p->name, "FPU_%d", i);
 
-        xTaskCreate(fpu_task, (int8_t*)p->name, 1024, p, tskIDLE_PRIORITY, NULL);
+        xTaskCreate(fpu_task, (int8_t*)p->name, configMINIMAL_STACK_SIZE*2, p, tskIDLE_PRIORITY, NULL);
     }
 
-    for(;;);
+    vTaskDelete(NULL);
 }
 
 
@@ -76,7 +75,7 @@ int main(void)
 
     // Create init task and start the scheduler
     //
-    xTaskCreate(init_task, (signed char*)"init", 1024, NULL, tskIDLE_PRIORITY, NULL);
+    xTaskCreate(init_task, (signed char*)"init", configMINIMAL_STACK_SIZE*8, NULL, tskIDLE_PRIORITY, NULL);
     vTaskStartScheduler();
 }
 

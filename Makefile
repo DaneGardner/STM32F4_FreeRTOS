@@ -20,12 +20,13 @@ TRGT = arm-none-eabi-
 CC   = $(TRGT)gcc
 CP   = $(TRGT)objcopy
 AS   = $(TRGT)gcc -x assembler-with-cpp
-BIN  = $(CP) -O ihex
+SZ   = $(TRGT)size -A
+HEX  = $(CP) -O ihex
 
 MCU  = cortex-m4
 
 # List all default C defines here, like -D_DEBUG=1
-DDEFS = -std=gnu99
+DDEFS = -std=gnu99 -fsingle-precision-constant
 
 # List all default ASM defines here, like -D_DEBUG=1
 DADEFS =
@@ -145,9 +146,9 @@ ULIBDIR =
 ULIBS =
 
 # Define optimisation level here
-OPT = -O0
+#OPT = -O0
 #OPT = -O2 -falign-functions=16 -fno-inline -fomit-frame-pointer
-#OPT = -Os
+OPT = -Os
 
 #
 # End of user defines
@@ -170,7 +171,7 @@ MCFLAGS = -mthumb -mcpu=$(MCU)
 
 ASFLAGS = $(MCFLAGS) -g -gdwarf-2 -Wa,-amhls=$(<:.s=.lst) $(ADEFS)
 CPFLAGS = $(MCFLAGS) $(OPT) $(FPU) -gdwarf-2 -Wall -Wstrict-prototypes -fverbose-asm -Wa,-ahlms=$(<:.c=.lst) $(DEFS)
-LDFLAGS = $(MCFLAGS) -mthumb -nostartfiles -T$(LDSCRIPT) -Wl,-Map=$(FULL_PRJ).map,--cref,--no-warn-mismatch $(LIBDIR)
+LDFLAGS = $(MCFLAGS) -nostartfiles -T$(LDSCRIPT) -Wl,-Map=$(FULL_PRJ).map,--cref,--no-warn-mismatch $(LIBDIR)
 
 # Generate dependency information
 CPFLAGS += -MD -MP -MF .dep/$(@F).d
@@ -181,29 +182,34 @@ CPFLAGS += -MD -MP -MF .dep/$(@F).d
 
 all: $(OBJS) $(FULL_PRJ).elf $(FULL_PRJ).hex
 
-
 %.o : %.c
+	@-echo
 	$(CC) -c $(CPFLAGS) -I . $(INCDIR) $< -o $@
 
 %.o : %.s
+	@-echo
 	$(AS) -c $(ASFLAGS) $< -o $@
 
-%elf: $(OBJS)
+%.elf: $(OBJS)
+	@-echo
 	$(CC) $(OBJS) $(LDFLAGS) $(LIBS) -o $@
 
-%hex: %elf
-	$(BIN) $< $@
+%.hex: %.elf
+	@-echo
+	$(HEX) $< $@
+	@-echo
+	@-$(SZ) $@
 
 clean:
-	-rm -f $(OBJS)
-	-rm -f $(FULL_PRJ).elf
-	-rm -f $(FULL_PRJ).map
-	-rm -f $(FULL_PRJ).hex
-	-rm -f $(SRC:.c=.c.bak)
-	-rm -f $(SRC:.c=.lst)
-	-rm -f $(ASRC:.s=.s.bak)
-	-rm -f $(ASRC:.s=.lst)
-	-rm -fR .dep
+	@-rm -f $(OBJS)
+	@-rm -f $(FULL_PRJ).elf
+	@-rm -f $(FULL_PRJ).map
+	@-rm -f $(FULL_PRJ).hex
+	@-rm -f $(SRC:.c=.c.bak)
+	@-rm -f $(SRC:.c=.lst)
+	@-rm -f $(ASRC:.s=.s.bak)
+	@-rm -f $(ASRC:.s=.lst)
+	@-rm -fR .dep
 
 #
 # Include the dependency files, should be the last of the makefile
