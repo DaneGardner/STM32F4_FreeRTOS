@@ -22,6 +22,7 @@ CP   = $(TRGT)objcopy
 AS   = $(TRGT)gcc -x assembler-with-cpp
 SZ   = $(TRGT)size -A
 HEX  = $(CP) -O ihex
+PGM  = /c/Program\ Files\ \(x86\)/STMicroelectronics/STM32\ ST-LINK\ Utility/ST-LINK\ Utility/ST-LINK_CLI.exe
 
 MCU  = cortex-m4
 
@@ -199,6 +200,11 @@ all: $(OBJS) $(FULL_PRJ).elf $(FULL_PRJ).hex
 	$(HEX) $< $@
 	@-echo
 	@-$(SZ) $@
+
+install: $(FULL_PRJ).hex
+	@-echo
+	@$(PGM) -c SWD -P "$(FULL_PRJ).hex" -V -Run
+	@-echo
 
 clean:
 	@-rm -f $(OBJS)
