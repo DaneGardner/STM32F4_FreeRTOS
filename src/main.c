@@ -11,10 +11,12 @@ int main(void)
 
     // Initialize tasks
     systemInit();
+    mytaskInit();
 
 
     // Start tasks
     systemStart();
+    mytaskStart();
 
 
     // Create init task and start the scheduler
