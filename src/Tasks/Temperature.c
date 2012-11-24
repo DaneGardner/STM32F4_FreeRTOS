@@ -52,4 +52,5 @@ static void temperatureTask(void *pvParameters)
     }
 }
 
-TASK_CALLBACK(temperatureInit,temperatureStart)
+TASKCB(TASKCB_INITTASKS+1,  temperatureInit)
+TASKCB(TASKCB_STARTTASKS+1, temperatureStart)

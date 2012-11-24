@@ -1,7 +1,7 @@
 #include "Common.h"
 
-#define INIT_TASKPRIORITY tskIDLE_PRIORITY+2
-#define INIT_STACKSIZE configMINIMAL_STACK_SIZE * 2
+#define INIT_TASKPRIORITY (configMAX_PRIORITIES - 1)
+#define INIT_STACKSIZE (configMINIMAL_STACK_SIZE * 2)
 
 static void init_task(void *pvParameters);
 
@@ -23,8 +23,7 @@ static void init_task(void *pvParameters)
 {
     //TODO: Initialize hardware
 
-    taskInitializeAll();
-    taskStartAll();
+    taskCallbackAll();
 
     // Delete this task (it's done)
 	vTaskDelete(NULL);

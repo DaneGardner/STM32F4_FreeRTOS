@@ -5,6 +5,8 @@
 #define MYTASK_TASKPRIORITY tskIDLE_PRIORITY
 #define MYTASK_STACKSIZE configMINIMAL_STACK_SIZE
 
+#define MYTASK_QUEUESIZE 20
+
 /** Prototype private functions
 */
 static void mytaskTask(void *pvParameters);
@@ -13,9 +15,13 @@ static void mytaskTask(void *pvParameters);
 /** Variables
 */
 static xTaskHandle mytaskTaskHandle;
+static xQueueHandle mytaskQueue;
+
 
 void mytaskInit(void)
 {
+	mytaskQueue = xQueueCreate(MYTASK_QUEUESIZE, sizeof(uint32_t));
+
 }
 
 void mytaskStart(void)
@@ -33,4 +39,5 @@ static void mytaskTask(void *pvParameters)
     }
 }
 
-TASK_CALLBACK(mytaskInit,mytaskStart)
+TASKCB(TASKCB_INITTASKS+5,  mytaskInit)
+TASKCB(TASKCB_STARTTASKS+5, mytaskStart)

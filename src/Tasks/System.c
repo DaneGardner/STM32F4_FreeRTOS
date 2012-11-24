@@ -81,4 +81,5 @@ void vApplicationStackOverflowHook(xTaskHandle *pxTask, signed char *pcTaskName)
 }
 #endif
 
-TASK_CALLBACK(systemInit,systemStart)
+TASKCB(TASKCB_INITTASKS,  systemInit)
+TASKCB(TASKCB_STARTTASKS, systemStart)
