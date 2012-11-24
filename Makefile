@@ -83,50 +83,51 @@ UDEFS = -DUSE_STDPERIPH_DRIVER
 UADEFS =
 
 # List C source files here
-SRC += src/uart.c
 SRC += src/main.c
 SRC += src/syscalls.c
+SRC += src/System.c
 SRC += src/CMSIS/system_stm32f4xx.c
 SRC += src/CMSIS/stm32f4xx_it.c
 SRC += src/FreeRTOS/ustime.c
 
 SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/misc.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c
 SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c
-SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c
+#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c
 
 SRC += FreeRTOS/Source/tasks.c
 SRC += FreeRTOS/Source/queue.c
 SRC += FreeRTOS/Source/list.c
 SRC += FreeRTOS/Source/croutine.c
 SRC += FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
+
 
 # List ASM source files here
 ASRC = src/CMSIS/startup_stm32f4xx.s
@@ -203,7 +204,7 @@ all: $(OBJS) $(FULL_PRJ).elf $(FULL_PRJ).hex
 
 install: $(FULL_PRJ).hex
 	@-echo
-	@$(PGM) -c SWD -P "$(FULL_PRJ).hex" -V -Run
+	@$(PGM) -c SWD -P "$(FULL_PRJ).hex" -Run
 	@-echo
 
 clean:

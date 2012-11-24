@@ -1,16 +1,7 @@
 #include "syscalls.h"
-#include "uart.h"
 
-#include <stm32f4xx.h>
+#include "Common.h"
 
-#include <FreeRTOS.h>
-
-#include <unistd.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <sys/time.h>
 
 size_t   __malloc_margin = 256;
 char    *__brkval;
@@ -20,18 +11,21 @@ void _exit(int code)
     for (;;);
 }
 
-
+/*
+//TODO: Create with Peripheral library uart calls instead
 ssize_t _read_r(struct _reent *r, int fd, void *ptr, size_t len)
 {
     return uart_read_r(r, fd, ptr, len);
 }
+*/
 
-
+/*
+//TODO: Create with Peripheral library uart calls instead
 ssize_t _write_r(struct _reent *r, int fd, const void *ptr, size_t len)
 {
     return uart_write_r(r, fd, ptr, len);
 }
-
+*/
 
 off_t _lseek_r(struct _reent *r, int fd, _off_t ptr, int dir)
 {
