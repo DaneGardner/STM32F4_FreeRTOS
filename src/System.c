@@ -79,3 +79,5 @@ void vApplicationStackOverflowHook(xTaskHandle *pxTask, signed char *pcTaskName)
     stackOverflowed = true;
 }
 #endif
+
+TASK_CALLBACK(systemInit,systemStart)

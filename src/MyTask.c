@@ -1,8 +1,8 @@
 #include "MyTask.h"
 #include "Common.h"
 
-#define MYTASK_TASKDELAY msToTicks(1000)
-#define MYTASK_TASKPRIORITY tskIDLE_PRIORITY+1
+#define MYTASK_TASKDELAY msToTicks(10000)
+#define MYTASK_TASKPRIORITY tskIDLE_PRIORITY
 #define MYTASK_STACKSIZE configMINIMAL_STACK_SIZE
 
 /** Prototype private functions
@@ -32,3 +32,5 @@ static void mytaskTask(void *pvParameters)
         vTaskDelay(MYTASK_TASKDELAY);
     }
 }
+
+TASK_CALLBACK(mytaskInit,mytaskStart)

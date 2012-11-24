@@ -86,6 +86,7 @@ UADEFS =
 SRC += src/main.c
 SRC += src/syscalls.c
 SRC += src/System.c
+SRC += src/Temperature.c
 SRC += src/MyTask.c
 SRC += src/CMSIS/system_stm32f4xx.c
 SRC += src/CMSIS/stm32f4xx_it.c
