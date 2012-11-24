@@ -85,12 +85,14 @@ UADEFS =
 # List C source files here
 SRC += src/main.c
 SRC += src/syscalls.c
-SRC += src/System.c
-SRC += src/Temperature.c
-SRC += src/MyTask.c
 SRC += src/CMSIS/system_stm32f4xx.c
 SRC += src/CMSIS/stm32f4xx_it.c
 SRC += src/FreeRTOS/ustime.c
+
+# Ordering of the task files here, orders the tasks for initialization and starting at runtime (via linker ordering)
+SRC += src/Tasks/System.c
+SRC += src/Tasks/Temperature.c
+SRC += src/Tasks/MyTask.c
 
 SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/misc.c
 #SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c

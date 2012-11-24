@@ -1,13 +1,9 @@
 #include "Common.h"
 
-#include "TaskAbstraction.h"
-#include "System.h"
-
 #define INIT_TASKPRIORITY tskIDLE_PRIORITY+2
 #define INIT_STACKSIZE configMINIMAL_STACK_SIZE * 2
 
 static void init_task(void *pvParameters);
-
 
 int main(void)
 {
