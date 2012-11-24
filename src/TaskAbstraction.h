@@ -18,9 +18,9 @@ extern inittask_t __task_initcall_start__[], __task_initcall_end__[];
 
 #define TASK_CALLBACK(fnInit, fnStart) __define_task_initcall(fnInit, fnStart)
 
-#define TASK_INITIALISE_ALL { for (inittask_t *fn = __task_initcall_start__; fn < __task_initcall_end__; fn++) if (fn->fn_init) (fn->fn_init)(); }
+#define taskInitializeAll() { for (inittask_t *fn = __task_initcall_start__; fn < __task_initcall_end__; fn++) if (fn->fn_init) (fn->fn_init)(); }
 
-#define TASK_START_ALL { for (inittask_t *fn = __task_initcall_start__; fn < __task_initcall_end__; fn++) if (fn->fn_start) (fn->fn_start)(); }
+#define taskStartAll() { for (inittask_t *fn = __task_initcall_start__; fn < __task_initcall_end__; fn++) if (fn->fn_start) (fn->fn_start)(); }
 
 
 #endif

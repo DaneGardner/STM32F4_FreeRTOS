@@ -9,6 +9,7 @@
 #define SYSTEM_TASKPRIORITY tskIDLE_PRIORITY+1
 #define SYSTEM_STACKSIZE configMINIMAL_STACK_SIZE
 
+
 /** Prototype private functions
 */
 static void systemTask(void *pvParameters);
