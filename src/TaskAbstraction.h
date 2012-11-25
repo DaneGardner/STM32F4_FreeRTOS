@@ -1,5 +1,33 @@
+/*!
+    \file TaskAbstraction.h
+    \author Dane Gardner <dane.gardner@gmail.com>
+    \version 0.1.0
+    \brief 
+
+    \section LICENSE
+    This file is part of the "My Project"<br />
+    Copyright (C) 2012 Dane Gardner
+
+    This library is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as published by the
+    Free Software Foundation; either version 2.1 of the License, or (at your
+    option) any later version.
+
+    This library is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
+    for more details.
+ 
+    You should have received a copy of the GNU Lesser General Public License
+    along with this library; if not, write to the Free Software Foundation,
+    Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ */
+
 #ifndef TASKABSTRACTION_H_
 #define TASKABSTRACTION_H_
+
+#include "Common.h"
+
 
 #define TASKCB_MAXPRIORITY 256
 #define TASKCB_MINPRIORITY 0
@@ -21,8 +49,14 @@ extern taskCB_t __taskCB_start__[], __taskCB_end__[];
         __attribute__((__used__)) \
         __attribute__((__section__(".taskCB.init"))) = { .function = func, .priority = pri };
 
+/*! \brief Allows functions to be registered to be automatically called when the application initializes
+ */
 #define TASKCB(pri,func) __define_taskCB(pri,func)
 
+/*! \brief Callback function that compares two function callback structs for qsort.
+    \sa taskCallbackAll() taskCallbackAll_ranged()
+    \internal
+ */
 static uint32_t cbcmp(const taskCB_t *left, const taskCB_t *right)
 {
     if(left->priority > right->priority) {
@@ -33,9 +67,10 @@ static uint32_t cbcmp(const taskCB_t *left, const taskCB_t *right)
     return 0;
 }
 
-static inline void taskCallbackAll(uint32_t min = TASKCB_MINPRIORITY, uint32_t max = TASKCB_MAXPRIORITY);
-
-static inline void taskCallbackAll(uint32_t min, uint32_t max)
+/*! \brief Iterates through a specified range of registered callbacks in order of priority.
+    \sa taskCallbackAll()
+ */
+static inline void taskCallbackAll_ranged(uint32_t min, uint32_t max)
 {
     if(!(__taskCB_end__ - __taskCB_start__)) {
         return;
@@ -51,13 +86,13 @@ static inline void taskCallbackAll(uint32_t min, uint32_t max)
     }
 
     // Sort the task callbacks by priority
-    //TODO: This adds 1.5k to the binary!  There might be a better way to do this.
+    //HACK: This adds 1.5k to the binary!  There might be a better way to do this.
     qsort(taskCBs, sizeof(taskCBs), sizeof(taskCB_t *), (int(*)(const void*, const void*))cbcmp);
 
     // Execute the buffer functions in order
     for(index = 0; index < sizeof(taskCBs); ++index) {
-        taskCB_t *taskCB = taskCBs[index]
-        if(taskCB && taskCB->priority => min && taskCB->priority <= max) {
+        taskCB_t *taskCB = taskCBs[index];
+        if(taskCB && taskCB->priority >= min && taskCB->priority <= max) {
             functionCB_t function = taskCB->function;
             if(function) {
                 (function)();
@@ -66,4 +101,13 @@ static inline void taskCallbackAll(uint32_t min, uint32_t max)
     }
 }
 
-#endif
+/*! \brief Iterates through all registered callbacks in order of priority.
+    \sa taskCallbackAll_ranged()
+ */
+static inline void taskCallbackAll(void)
+{
+    taskCallbackAll_ranged(TASKCB_MINPRIORITY, TASKCB_MAXPRIORITY);
+}
+
+
+#endif // TASKABSTRACTION_H_

@@ -102,35 +102,13 @@
   ******************************************************************************
   */
 
-/** @addtogroup CMSIS
-  * @{
-  */
-
-/** @addtogroup stm32f4xx_system
-  * @{
-  */
-
-/** @addtogroup STM32F4xx_System_Private_Includes
+/**
+  * @addtogroup CMSIS
   * @{
   */
 
 #include "stm32f4xx.h"
 
-/**
-  * @}
-  */
-
-/** @addtogroup STM32F4xx_System_Private_TypesDefinitions
-  * @{
-  */
-
-/**
-  * @}
-  */
-
-/** @addtogroup STM32F4xx_System_Private_Defines
-  * @{
-  */
 
 /************************* Miscellaneous Configuration ************************/
 /*!< Uncomment the following line if you need to use external SRAM mounted
@@ -157,53 +135,21 @@
 
 /******************************************************************************/
 
-/**
-  * @}
-  */
-
-/** @addtogroup STM32F4xx_System_Private_Macros
-  * @{
-  */
-
-/**
-  * @}
-  */
-
-/** @addtogroup STM32F4xx_System_Private_Variables
-  * @{
-  */
-
   uint32_t SystemCoreClock = 168000000;
 
   __I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
 
-/**
-  * @}
-  */
-
-/** @addtogroup STM32F4xx_System_Private_FunctionPrototypes
-  * @{
-  */
 
 static void SetSysClock(void);
 #ifdef DATA_IN_ExtSRAM
   static void SystemInit_ExtMemCtl(void);
 #endif /* DATA_IN_ExtSRAM */
 
-/**
-  * @}
-  */
-
-/** @addtogroup STM32F4xx_System_Private_Functions
-  * @{
-  */
 
 /**
   * @brief  Setup the microcontroller system
   *         Initialize the Embedded Flash Interface, the PLL and update the
   *         SystemFrequency variable.
-  * @param  None
-  * @retval None
   */
 void SystemInit(void)
 {
@@ -279,9 +225,6 @@ void SystemInit(void)
   *
   *         - The result of this function could be not correct when using fractional
   *           value for HSE crystal.
-  *
-  * @param  None
-  * @retval None
   */
 void SystemCoreClockUpdate(void)
 {
@@ -334,10 +277,8 @@ void SystemCoreClockUpdate(void)
 /**
   * @brief  Configures the System clock source, PLL Multiplier and Divider factors,
   *         AHB/APBx prescalers and Flash settings
-  * @Note   This function should be called only once the RCC clock configuration
+  * @note   This function should be called only once the RCC clock configuration
   *         is reset to the default reset state (done in SystemInit() function).
-  * @param  None
-  * @retval None
   */
 static void SetSysClock(void)
 {
@@ -538,14 +479,6 @@ void SystemInit_ExtMemCtl(void)
 }
 #endif /* DATA_IN_ExtSRAM */
 
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
 
 /**
   * @}

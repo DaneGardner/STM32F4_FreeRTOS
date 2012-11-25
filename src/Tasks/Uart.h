@@ -1,10 +1,10 @@
 /*!
     \addtogroup tasks Tasks
     \{
-    \addtogroup examples Example Tasks Module
+    \addtogroup uart UART Task Module
     \{
 
-    \file MyTask.h
+    \file Uart.h
     \author Dane Gardner <dane.gardner@gmail.com>
     \version 0.1.0
     \brief 
@@ -28,11 +28,11 @@
     Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#ifndef MYTASK_H_
-#define MYTASK_H_
+#ifndef UART_H_
+#define UART_H_
 
-void mytaskInit(void);
-void mytaskStart(void);
+void uartInit(void);
+void uartStart(void);
 
 #endif
 

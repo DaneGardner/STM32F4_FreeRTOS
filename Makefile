@@ -84,14 +84,15 @@ UADEFS =
 
 # List C source files here
 SRC += src/main.c
-SRC += src/syscalls.c
+SRC += src/SysCalls.c
+SRC += src/TaskAbstraction.c
 SRC += src/CMSIS/system_stm32f4xx.c
 SRC += src/CMSIS/stm32f4xx_it.c
 SRC += src/FreeRTOS/ustime.c
 
-# Ordering of the task files here, orders the tasks for initialization and starting at runtime (via linker ordering)
 SRC += src/Tasks/System.c
 SRC += src/Tasks/Temperature.c
+SRC += src/Tasks/Uart.c
 SRC += src/Tasks/MyTask.c
 
 SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/misc.c
@@ -123,7 +124,7 @@ SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c
 #SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c
 #SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c
 #SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c
-#SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c
+SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c
 #SRC += STM32F4xx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c
 
 SRC += FreeRTOS/Source/tasks.c
